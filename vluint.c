@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define FLAT_INCLUDES
-#include "../keyargs/keyargs.h"
-#include "../array/range.h"
+#include "../range/def.h"
 #include "../window/def.h"
 #include "../window/alloc.h"
 #include "vluint.h"
@@ -13,62 +12,52 @@
 
 #define VLUINT_CHAR_MAX 128
 
-keyargs_define(vluint_read)
+unsigned long long vluint_read (bool * error, range_const_unsigned_char * input)
 {
-    vluint_result result = 0;
+    unsigned long long result = 0;
     
-    const unsigned char * i;
     unsigned char c;
 
-    vluint_result power = 1;
+    unsigned long long power = 1;
+    unsigned char cnum;
 
-    for_range (i, *args.input)
+    while (true)
     {
-	c = *(char*)i;
-
-	result += power * (c & ~VLUINT_CHAR_MAX);
-        
-	if ( !(c & VLUINT_CHAR_MAX) )
+	if (range_is_empty (*input))
 	{
-	    if (args.vluint)
-	    {
-		args.vluint->begin = args.input->begin;
-		args.vluint->end = i + 1;
-	    }
-
-	    if (args.rest)
-	    {
-		args.rest->begin = i + 1;
-		args.rest->end = args.input->end;
-	    }
-
-	    if (args.result)
-	    {
-		*args.result = result;
-	    }
-
-	    return true;
+	    goto fail;
 	}
 	
+	c = *(input->begin++);
+
+	cnum = c & ~VLUINT_CHAR_MAX;
+
+	result += power * cnum;
+
+	if (c == cnum)
+	{
+	    return result;
+	}
+
 	power *= VLUINT_CHAR_MAX;
     }
 
-    //log_error ("vluint is truncated");
-
-    return false;
+fail:
+    *error = true;
+    return -1;
 }
 
-void vluint_write(window_unsigned_char * output, vluint_result n)
+void vluint_write (window_unsigned_char * output, unsigned long long input)
 {
     //buffer_rewrite (*output);
 
-    while (n >= VLUINT_CHAR_MAX)
+    while (input >= VLUINT_CHAR_MAX)
     {
-	*window_push(*output) = (n % VLUINT_CHAR_MAX) | VLUINT_CHAR_MAX;
-	n = n >> 7;
+	*window_push(*output) = (input % VLUINT_CHAR_MAX) | VLUINT_CHAR_MAX;
+	input = input >> 7;
 
 	assert (output->region.end[-1] & VLUINT_CHAR_MAX);
     }
 
-    *window_push(*output) = n;
+    *window_push(*output) = input;
 }

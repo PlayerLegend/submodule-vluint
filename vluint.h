@@ -4,14 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define FLAT_INCLUDES
-#include "../keyargs/keyargs.h"
-#include "../array/range.h"
+#include "../range/def.h"
 #include "../window/def.h"
 #endif
 
-typedef size_t vluint_result;
-typedef char vluint[];
 
-keyargs_declare(bool, vluint_read, const range_const_unsigned_char * input; range_const_unsigned_char *vluint, *rest; vluint_result * result;);
-#define vluint_read(...) keyargs_call(vluint_read, __VA_ARGS__)
-void vluint_write(window_unsigned_char * output, vluint_result n);
+void vluint_write (window_unsigned_char * output, unsigned long long input);
+unsigned long long vluint_read (bool * error, range_const_unsigned_char * input);
