@@ -6,7 +6,8 @@
 #define FLAT_INCLUDES
 #include "../range/def.h"
 #include "../window/def.h"
+#include "vluint.h"
+#include "../convert/source.h"
 #endif
 
-void vluint_write (window_unsigned_char * output, unsigned long long input);
-unsigned long long vluint_read (bool * error, range_const_unsigned_char * input);
+unsigned long long vluint_read_source (bool * error, convert_source * source, size_t limit);

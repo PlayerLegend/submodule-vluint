@@ -5,12 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 #define FLAT_INCLUDES
-#include "../../range/def.h"
-#include "../../window/def.h"
-#include "../../window/printf.h"
-#include "../vluint.h"
-//#include "../../metabase/metabase.h"
-#include "../../log/log.h"
+#include "../../../range/def.h"
+#include "../../../window/def.h"
+#include "../../../window/printf.h"
+#include "../../vluint.h"
+//#include "../../../metabase/metabase.h"
+#include "../../../log/log.h"
 
 int main(int argc, char * argv[])
 {

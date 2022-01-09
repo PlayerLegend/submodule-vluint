@@ -14,6 +14,8 @@
 
 unsigned long long vluint_read (bool * error, range_const_unsigned_char * input)
 {
+    const unsigned char * start = input->begin;
+    
     unsigned long long result = 0;
     
     unsigned char c;
@@ -43,6 +45,7 @@ unsigned long long vluint_read (bool * error, range_const_unsigned_char * input)
     }
 
 fail:
+    input->begin = start;
     *error = true;
     return -1;
 }
