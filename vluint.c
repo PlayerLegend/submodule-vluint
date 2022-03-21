@@ -12,11 +12,11 @@
 
 #define VLUINT_CHAR_MAX 128
 
-unsigned long long vluint_read (bool * error, range_const_unsigned_char * input)
+bool vluint_read (vluint_result * result, range_const_unsigned_char * input)
 {
     const unsigned char * start = input->begin;
     
-    unsigned long long result = 0;
+    unsigned long long sum = 0;
     
     unsigned char c;
 
@@ -34,11 +34,12 @@ unsigned long long vluint_read (bool * error, range_const_unsigned_char * input)
 
 	cnum = c & ~VLUINT_CHAR_MAX;
 
-	result += power * cnum;
+	sum += power * cnum;
 
 	if (c == cnum)
 	{
-	    return result;
+	    *result = sum;
+	    return true;
 	}
 
 	power *= VLUINT_CHAR_MAX;
@@ -46,11 +47,10 @@ unsigned long long vluint_read (bool * error, range_const_unsigned_char * input)
 
 fail:
     input->begin = start;
-    *error = true;
-    return -1;
+    return false;
 }
 
-void vluint_write (window_unsigned_char * output, unsigned long long input)
+void vluint_write (window_unsigned_char * output, vluint_result input)
 {
     //buffer_rewrite (*output);
 

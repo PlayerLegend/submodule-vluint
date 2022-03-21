@@ -1,15 +1,9 @@
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#define FLAT_INCLUDES
-#include "../../../range/def.h"
-#include "../../../window/def.h"
+#include "../../vluint.h"
+#include "../../../convert/status.h"
 #include "../../../convert/sink.h"
 #include "../../../convert/fd/sink.h"
+#include <unistd.h>
 #include "../../../log/log.h"
-#include "../../vluint.h"
 
 int main(int argc, char * argv[])
 {
@@ -21,9 +15,7 @@ int main(int argc, char * argv[])
 
     fd_sink fd_sink = fd_sink_init (STDOUT_FILENO, &contents.region.const_cast);
 
-    bool error = false;
-
-    if (!convert_drain (&error, &fd_sink.sink))
+    if (convert_drain (&fd_sink.sink) != STATUS_UPDATE)
     {
 	log_fatal ("Could not write to output");
     }

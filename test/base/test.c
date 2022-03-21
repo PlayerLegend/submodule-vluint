@@ -1,16 +1,7 @@
-#include <assert.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#define FLAT_INCLUDES
-#include "../../../range/def.h"
-#include "../../../window/def.h"
-#include "../../../window/printf.h"
 #include "../../vluint.h"
-//#include "../../../metabase/metabase.h"
-#include "../../../log/log.h"
+#include "../../../window/printf.h"
+#include <assert.h>
+#include <string.h>
 
 int main(int argc, char * argv[])
 {
@@ -23,9 +14,9 @@ int main(int argc, char * argv[])
 
     size_t start_size = range_count(input.region);
     
-    bool error = false;
-    unsigned long long result = vluint_read (&error, &input.region.const_cast);
-    assert (!error);
+    vluint_result result;
+
+    assert (vluint_read (&result, &input.region.const_cast));
 
     assert (range_count(input.region) == 4);
     assert (0 == memcmp (input.region.begin, "asdf", 4));
