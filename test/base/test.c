@@ -16,7 +16,7 @@ int main(int argc, char * argv[])
     
     vluint_result result;
 
-    assert (vluint_read (&result, &input.region.const_cast));
+    assert (vluint_read (&result, &input.region.alias_const));
 
     assert (range_count(input.region) == 4);
     assert (0 == memcmp (input.region.begin, "asdf", 4));

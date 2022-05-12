@@ -2,7 +2,7 @@
 
 bool vluint_read_source (vluint_result * result, convert_source * source, size_t limit)
 {
-    range_const_unsigned_char * input = &source->contents->region.const_cast;
+    range_const_unsigned_char * input = &source->contents->region.alias_const;
 
     status status;
 

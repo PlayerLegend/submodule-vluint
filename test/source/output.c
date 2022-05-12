@@ -13,7 +13,7 @@ int main(int argc, char * argv[])
 
     vluint_write (&contents, n);
 
-    fd_sink fd_sink = fd_sink_init (STDOUT_FILENO, &contents.region.const_cast);
+    fd_sink fd_sink = fd_sink_init (STDOUT_FILENO, &contents.region.alias_const);
 
     if (convert_drain (&fd_sink.sink) != STATUS_UPDATE)
     {
