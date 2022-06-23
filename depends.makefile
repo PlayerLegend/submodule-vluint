@@ -1,5 +1,5 @@
 src/vluint/source.o: src/convert/source.h
-src/vluint/source.o: src/convert/status.h
+src/vluint/source.o: src/convert/type.h
 src/vluint/source.o: src/range/def.h
 src/vluint/source.o: src/vluint/source.h
 src/vluint/source.o: src/vluint/vluint.h
@@ -10,14 +10,14 @@ src/vluint/test/base/test.o: src/window/def.h
 src/vluint/test/base/test.o: src/window/printf.h
 src/vluint/test/source/output.o: src/convert/fd/sink.h
 src/vluint/test/source/output.o: src/convert/sink.h
-src/vluint/test/source/output.o: src/convert/status.h
+src/vluint/test/source/output.o: src/convert/type.h
 src/vluint/test/source/output.o: src/log/log.h
 src/vluint/test/source/output.o: src/range/def.h
 src/vluint/test/source/output.o: src/vluint/vluint.h
 src/vluint/test/source/output.o: src/window/def.h
 src/vluint/test/source/source.o: src/convert/fd/source.h
 src/vluint/test/source/source.o: src/convert/source.h
-src/vluint/test/source/source.o: src/convert/status.h
+src/vluint/test/source/source.o: src/convert/type.h
 src/vluint/test/source/source.o: src/range/def.h
 src/vluint/test/source/source.o: src/vluint/source.h
 src/vluint/test/source/source.o: src/vluint/vluint.h

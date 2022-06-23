@@ -1,5 +1,6 @@
 #ifndef FLAT_INCLUDES
 #include "../convert/source.h"
+#include <stdbool.h>
 #include "vluint.h"
 #endif
 
